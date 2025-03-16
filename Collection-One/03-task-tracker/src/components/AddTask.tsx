@@ -33,10 +33,19 @@ const AddTask = ({ taskList, setTaskList }: Props) => {
       setErrorMessage("Enter project name to continue");
       return;
     }
-    setTaskList([
-      ...taskList,
-      { id: Date.now(), projectName, taskDescription },
-    ]);
+    let tempList = taskList;
+    tempList.push({
+      id: Date.now(),
+      projectName,
+      taskDescription,
+    });
+    localStorage.setItem("taskList", JSON.stringify(tempList));
+    window.location.reload();
+
+    // setTaskList([
+    //   ...taskList,
+    //   { id: Date.now(), projectName, taskDescription },
+    // ]);
     setProjectName("");
     setTaskDescription("");
     setAddModal(false);

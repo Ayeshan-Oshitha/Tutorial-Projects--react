@@ -25,11 +25,13 @@ const EditTask = ({ index, task, taskList, setTaskList }: Props) => {
   const handleUpdate = (e: React.FormEvent) => {
     e.preventDefault();
     let taskIndex = taskList.indexOf(task);
-    taskList.splice(taskIndex, 1);
-    setTaskList([
-      ...taskList,
-      { id: Date.now(), projectName, taskDescription },
-    ]);
+    taskList.splice(taskIndex, 1, {
+      id: task.id,
+      projectName: projectName,
+      taskDescription: taskDescription,
+    });
+    localStorage.setItem("taskList", JSON.stringify(taskList));
+    window.location.reload();
     setEditModal(false);
   };
 
